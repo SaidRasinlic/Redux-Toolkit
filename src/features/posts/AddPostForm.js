@@ -1,27 +1,44 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAllUsers } from '../users/usersSlice';
-import { postAdded } from './postsSlice';
+import { addNewPost } from './postsSlice';
 
 const AddPostForm = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [userId, setUserId] = useState(0);
+  const [addRequestStatus, setAddRequestStatus] = useState('idle');
 
   const users = useSelector(selectAllUsers);
 
   const dispatch = useDispatch();
 
-  const canSave = Boolean(title) && Boolean(content) && Boolean(userId);
+  const canSave = [title, content, userId].every(Boolean) && addRequestStatus === 'idle';
+
+  // const onSavePostClicked = () => {
+  //   if (title && content && userId) {
+  //     dispatch(postAdded(title, content, userId));
+
+  //     setTitle('');
+  //     setContent('');
+  //     setUserId(0);
+  //   }
+  // };
 
   const onSavePostClicked = () => {
-    if (title && content && userId) {
-      console.log(typeof userId, userId);
-      dispatch(postAdded(title, content, userId));
+    if (canSave) {
+      try {
+        setAddRequestStatus('pending');
+        dispatch(addNewPost({ title, body: content, userId })).unwrap();
 
-      setTitle('');
-      setContent('');
-      setUserId(0);
+        setTitle('');
+        setContent('');
+        setUserId(0);
+      } catch (err) {
+        console.error('Failed to save the post', err);
+      } finally {
+        setAddRequestStatus('idle');
+      }
     }
   };
 
