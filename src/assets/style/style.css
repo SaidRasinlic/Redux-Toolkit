@@ -51,7 +51,16 @@ nav ul li {
   margin-right: 1rem;
 }
 
-nav a,
+nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.postCredit a {
+  margin-right: 0.5rem;
+  color: black;
+}
+
 nav a:visited {
   color: #fff;
   text-decoration: none;
@@ -106,7 +115,6 @@ textarea {
   font-size: 1rem;
 }
 
-.postCredit a,
 .postCredit a:visited {
   margin-right: 0.5rem;
   color: black;
