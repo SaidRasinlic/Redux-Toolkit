@@ -37,6 +37,20 @@ header {
   top: 0;
 }
 
+nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
 .postCredit {
   font-size: 1rem;
 }
@@ -50,20 +64,6 @@ header {
 .postCredit a:hover,
 .postCredit a:focus {
   color: hsla(0, 0%, 0%, 0.75);
-}
-
-nav {
-  display: flex;
-  justify-content: flex-end;
-}
-
-nav ul {
-  list-style-type: none;
-}
-
-nav ul li {
-  display: inline-block;
-  margin-right: 1rem;
 }
 
 nav a,
@@ -116,7 +116,6 @@ form {
 textarea {
   height: 200px;
 }
-
 
 .excerpt {
   font-style: italic;
