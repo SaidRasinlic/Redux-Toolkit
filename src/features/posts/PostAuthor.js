@@ -1,16 +1,24 @@
-import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { selectAllUsers } from '../users/usersSlice';
+import { useGetUsersQuery } from '../users/usersSlice';
 
 const PostAuthor = ({ userId }) => {
-  const users = useSelector(selectAllUsers);
+  const { user: author, isLoading } = useGetUsersQuery('getUsers', {
+    selectFromResult: ({ data, isLoading }) => ({
+      user: data?.entities[userId],
+      isLoading,
+    }),
+  });
 
-  const author = users.find((user) => user.id === userId);
+  if (isLoading) {
+    <p>Loading...</p>;
+  }
+
   return (
     <span>
       by
       {' '}
-      {author ? author.name : ' Unknown author '}
+      {author ? <Link to={`/user/${userId}`}>{author.name}</Link> : ' Unknown author '}
     </span>
   );
 };

@@ -1,26 +1,38 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSelector } from '@reduxjs/toolkit';
+import apiSlice from '../api/apiSlice';
 
-const USERS_URL = 'https://jsonplaceholder.typicode.com/users';
+const usersAdapter = createEntityAdapter();
 
-const initialState = [];
+const initialState = usersAdapter.getInitialState();
 
-export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-  const response = await fetch(USERS_URL);
-  const data = await response.json();
-  return data;
+export const usersApiSlice = apiSlice.injectEndpoints({
+  endpoints: (builder) => ({
+    getUsers: builder.query({
+      query: () => '/users',
+      transformResponse: (responseData) => usersAdapter.setAll(initialState, responseData),
+      providesTags: (result) => [
+        { type: 'User', id: 'LIST' },
+        ...result.ids.map((id) => ({ type: 'User', id })),
+      ],
+    }),
+  }),
 });
 
-const usersSlice = createSlice({
-  name: 'users',
-  initialState,
-  reducers: {},
-  extraReducers(builder) {
-    builder.addCase(fetchUsers.fulfilled, (state, action) => action.payload);
-  },
-});
+// Returns query result object
+export const selectUsersResult = usersApiSlice.endpoints.getUsers.select();
 
-export const selectAllUsers = (state) => state.users;
+// Creates memoized selector used for normalization
+export const selectUsersData = createSelector(
+  selectUsersResult,
+  (usersResult) => usersResult.data,
+);
 
-export const selectUserById = (state, userId) => state.users.find((user) => user.id === userId);
+// getSelectors creates these selectors and we rename them with aliases using destructuring
+export const {
+  selectAll: selectAllUsers,
+  // Pass in a selector that returns the posts slice of state
+} = usersAdapter.getSelectors((state) => selectUsersData(state) ?? initialState);
 
-export default usersSlice.reducer;
+export const {
+  useGetUsersQuery,
+} = usersApiSlice;
