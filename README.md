@@ -1,4 +1,4 @@
-# MERN-Stack-Frontend (Blog App with advanced RTK Queries from the Redux Toolkit)
+# Redux Toolkit (Blog-App with advanced RTK Queries from the Redux Toolkit)
 
 > This is a Blog-App built with React and Redux but with way harder optimizations and advanced skills like optimistic updates, normalization, RTK queries, memoization and more!
 
@@ -33,8 +33,8 @@ To get a local copy up and running follow these simple example steps.
 
 ### Setup
 
-- Clone this [repo](https://github.com/SaidRasinlic/MERN-Stack-Frontend)
-- Navigate to the correct directory `cd mern-stack-frontend` (case sensitive)
+- Clone this [repo](https://github.com/SaidRasinlic/Redux-Toolkit)
+- Navigate to the correct directory `cd redux-toolkit` (case sensitive)
 - In your terminal run the following commands:
   - `yarn install`
 - Run `yarn start` to start your server and build the required configuration
