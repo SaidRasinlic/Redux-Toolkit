@@ -1,8 +1,9 @@
 # Redux Toolkit (Blog-App with advanced RTK Queries from the Redux Toolkit)
 
-> This is a Blog-App built with React and Redux but with way harder optimizations and advanced skills like optimistic updates, normalization, RTK queries, memoization and more!
+ This is a Blog-App built with React and Redux but with way harder optimizations and advanced skills like optimistic updates, normalization, RTK queries, memoization and more!
 
-- RTK Query is an advanced data fetching and caching tool, designed to simplify common cases for loading data in a web application. RTK Query itself is built on top of the Redux Toolkit core, and leverages RTK's APIs like createSlice and createAsyncThunk to implement its capabilities.
+> RTK Query is an advanced data fetching and caching tool, designed to simplify common cases for loading data in a web application. RTK Query itself is built on top of the Redux Toolkit core, and leverages RTK's APIs like createSlice and createAsyncThunk to implement its capabilities.
+  
 
 ![screenshot](./public/Project-Snapshot.png)
 
