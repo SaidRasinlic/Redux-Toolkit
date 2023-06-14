@@ -4,13 +4,13 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import store from './app/store';
 import App from './App';
-import { fetchUsers } from './features/users/usersSlice';
-import { fetchPosts } from './features/posts/postsSlice';
+import { extendedApiSlice } from './features/posts/postsSlice';
+import { usersApiSlice } from './features/users/usersSlice';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-store.dispatch(fetchPosts());
-store.dispatch(fetchUsers());
+store.dispatch(extendedApiSlice.endpoints.getPosts.initiate());
+store.dispatch(usersApiSlice.endpoints.getUsers.initiate());
 
 root.render(
   // <React.StrictMode>
